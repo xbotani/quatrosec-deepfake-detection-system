@@ -1,0 +1,217 @@
+/* Base reset & premium typography */
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Inter',sans-serif;
+  background:#0c0c16;color:#e4e4e7;
+  display:flex;flex-direction:column;min-height:100vh;line-height:1.5;
+  transition:background .3s,color .3s;
+}
+/* Light‑mode override */
+body.light-theme{background:#f5f5f5;color:#222}
+
+/*──────────── Header ────────────*/
+header{
+  background:#141420;padding:1rem 2rem;box-shadow:0 2px 8px rgba(0,0,0,.5);
+  display:flex;align-items:center;justify-content:space-between
+}
+body.light-theme header{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+
+/* Logo styles */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-logo {
+  height: 32px; /* Adjust as needed */
+  width: auto;
+  transition: filter 0.3s ease;
+}
+
+/* Dark/light mode logo adjustments */
+body.light-theme .header-logo {
+  filter: brightness(0.8); /* Slightly darken logo in light mode for better contrast */
+}
+
+.controls{display:flex;align-items:center;gap:1rem}
+
+/* Language selector */
+.lang-switcher select{
+  background:#222236;color:#e4e4e7;border:1px solid #2a2a3d;
+  padding:.3rem .6rem;border-radius:4px;font-size:.9rem;cursor:pointer;
+  transition:background .2s,border-color .2s
+}
+.lang-switcher select:hover{background:#2a2a3d;border-color:#4e73df}
+body.light-theme .lang-switcher select{
+  background:#fafafa;color:#222;border:1px solid #ccc
+}
+
+/* Theme toggle (moon ⇆ sun button) */
+.theme-switcher{
+  display:flex;
+  align-items:center;
+  margin-left:0.5rem;
+}
+
+.theme-switcher button{
+  background:none;
+  border:none;
+  padding:0.5rem;
+  border-radius:50%;
+  width:2.5rem;
+  height:2.5rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:background 0.2s, transform 0.2s;
+  cursor:pointer;
+  position:relative;
+}
+
+.theme-switcher button:hover{
+  background:rgba(255,255,255,0.1);
+  transform:scale(1.05);
+}
+
+body.light-theme .theme-switcher button:hover{
+  background:rgba(0,0,0,0.05);
+}
+
+.theme-switcher i{
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size:1.35rem;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Light mode sun icon */
+body.light-theme .theme-switcher .fa-sun {
+  color: #f59f00 !important;
+  display: block !important;
+}
+
+/* Dark mode moon icon */
+body:not(.light-theme) .theme-switcher .fa-moon {
+  color: #e4e4e7 !important;
+  display: block !important;
+}
+
+/*──────────── Layout / Cards ────────────*/
+.container{flex:1;display:flex;gap:2rem;padding:2rem}
+@media(max-width:768px){.container{flex-direction:column;padding:1rem}}
+
+.card{
+  background:#19192b;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.6);
+  display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s;
+  opacity:0;animation:fadeIn .5s forwards
+}
+body.light-theme .card{background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.card:hover{transform:translateY(-4px);box-shadow:0 8px 16px rgba(0,0,0,.7)}
+@keyframes fadeIn{to{opacity:1}}
+
+.card-header{
+  background:linear-gradient(90deg,#2a2a3d,#1f1f2e);
+  padding:.75rem 1rem;border-bottom:1px solid #2a2a3d;
+  font-weight:600;color:#ccc;display:flex;align-items:center
+}
+body.light-theme .card-header{
+  background:linear-gradient(90deg,#e0e0e0,#f5f5f5);
+  color:#333;border-bottom:1px solid #ddd
+}
+.card-header i{margin-right:.5rem;color:#4e73df}
+.card-body{flex:1;padding:1rem;display:flex;flex-direction:column}
+
+/*──────────── Global progress bar ────────────*/
+.progress-container{width:100%;height:6px;background:#2a2a3d;overflow:hidden;border-radius:4px}
+body.light-theme .progress-container{background:#ddd}
+.progress-bar{
+  width:0;height:100%;
+  background:linear-gradient(90deg,#4e73df,#6b8cff);
+  transition:width 1s ease
+}
+
+/*──────────── Drop zone ────────────*/
+.drop-card{flex:1}
+.drop-zone{
+  flex:1;border:2px dashed #4e73df;border-radius:8px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  cursor:pointer;padding:2rem;text-align:center;
+  transition:background .3s,border-color .3s;
+  position:relative;overflow:hidden
+}
+.drop-zone.active{background:rgba(78,115,223,.1);border-color:#889cff}
+.drop-zone i{color:#4e73df;font-size:2.5rem;margin-bottom:.75rem}
+.drop-zone p{font-size:1.2rem;color:#c5c5d1}
+
+/* Ripple */
+.drop-zone .ripple{
+  position:absolute;border-radius:50%;background:rgba(78,115,223,.4);
+  transform:scale(0);animation:ripple .6s linear
+}
+@keyframes ripple{to{transform:scale(4);opacity:0}}
+
+/*──────────── Result card ────────────*/
+.result-card{flex:1}
+.preview{
+  background:#222236;border-radius:8px;flex:1;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:1rem
+}
+.preview img{max-width:100%;max-height:100%;border-radius:4px}
+
+/* Skeleton loading bars */
+.skeleton-bar{
+  height:12px;background:#2a2a3d;border-radius:6px;margin:.75rem 0;
+  animation:pulse 1.5s infinite
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* Metrics list */
+.metrics-section{margin-bottom:1.5rem}
+.metrics-section h2{
+  font-size:.9rem;font-weight:600;color:#aaa;text-transform:uppercase;
+  margin-bottom:.5rem;border-bottom:1px solid #2a2a3d;padding-bottom:.25rem
+}
+body.light-theme .metrics-section h2{color:#555;border-color:#ddd}
+
+.metrics-list{list-style:none;padding:0}
+.metrics-list li{
+  display:flex;align-items:center;padding:.5rem 0;border-bottom:1px solid #2a2a3d
+}
+.metrics-list li:last-child{border-bottom:none}
+
+.metrics-list .label{width:30%;color:#ddd}
+.metrics-list .bar{
+  position:relative;width:55%;height:10px;background:#2a2a3d;
+  margin:0 .5rem;border-radius:5px;overflow:hidden
+}
+body.light-theme .metrics-list .bar{background:#eee}
+.metrics-list .bar .fill{
+  height:100%;background:linear-gradient(90deg,#4e73df,#6b8cff);
+  transition:width .8s ease
+}
+.metrics-list .value{width:15%;text-align:right;font-weight:600;color:#fff}
+body.light-theme .metrics-list .value{color:#333}
+
+/* Tooltip */
+.metrics-list li[title]{position:relative;cursor:help}
+.metrics-list li[title]:hover::after{
+  content:attr(title);position:absolute;top:-1.6em;left:50%;transform:translateX(-50%);
+  background:#333;color:#fff;padding:.2em .5em;border-radius:4px;font-size:.75rem;white-space:nowrap;z-index:10
+}
+
+/* Misc states */
+.placeholder{color:#77778a;font-style:italic;text-align:center;margin-top:2rem}
+.error{color:#ff6b6b}
+
+/* Footer */
+footer{
+  background:#141420;text-align:center;padding:1rem;font-size:.9rem;
+  color:#77778a;border-top:1px solid #2a2a3d
+}
+body.light-theme footer{background:#fff;color:#555;border-color:#ddd}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" 
+        content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title data-i18n="page_title">Deepfake Detection Portal</title>
+
+  <!-- Favicon (tab icon) -->
+  <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+
+  <!-- Font Awesome MUST come first -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-pn1D0kK6K6GtBjq5q3Ef2iR+poVlQajNu57E8qfJLqQaXfWQRJ5xWJWnLM0H1HRB9w0bX/S0pSUn+JVmJQ0eIw=="
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer" />
+
+  <!-- Then other fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+        rel="stylesheet" />
+
+  <!-- App CSS -->
+  <link rel="stylesheet"
+        href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="QuatroSec AI Logo" class="header-logo">
+      <span data-i18n="app_name">QuatroSec AI</span>
+    </div>
+
+    <div class="controls">
+      <!-- Language Selector -->
+      <div class="lang-switcher">
+        <select id="lang-select">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="ar">العربية</option>
+          <option value="ku">کوردی (سۆرانی)</option>
+        </select>
+      </div>
+
+      <!-- Theme Toggle -->
+      <div class="theme-switcher">
+        <button id="theme-toggle" aria-label="Toggle theme">
+          <i id="theme-icon" class="fas fa-moon"></i> <!-- Changed to fas -->
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Global Progress Bar -->
+  <div class="progress-container">
+    <div id="progress-bar" class="progress-bar"></div>
+  </div>
+
+  <main class="container">
+
+    <!-- Upload Card -->
+    <div class="card drop-card">
+      <div class="card-header">
+        <i class="fas fa-cloud-arrow-up"></i> <!-- Changed to fas -->
+        <span data-i18n="upload_title">Upload Image</span>
+      </div>
+      <div class="card-body">
+        <div id="drop" class="drop-zone">
+          <i class="fas fa-cloud-arrow-up fa-2x"></i> <!-- Changed to fas -->
+          <p data-i18n="upload_placeholder">Drag&nbsp;&amp;&nbsp;Drop Image Here</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analysis Card -->
+    <div class="card result-card">
+      <div class="card-header">
+        <i class="fas fa-chart-simple"></i> <!-- Changed to fas -->
+        <span data-i18n="analysis_title">Analysis</span>
+      </div>
+      <div class="card-body">
+        <div class="preview">
+          <img id="preview" src="" alt=""
+               data-i18n-attr="alt" data-i18n="preview_alt" />
+        </div>
+        <div id="results">
+          <p class="placeholder" data-i18n="awaiting">
+            <i class="fas fa-info-circle"></i> Awaiting image… <!-- Changed to fas -->
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p data-i18n="footer">
+      © 2025 QuatroSec AI • Forensic‑grade Deepfake Detection
+    </p>
+    <div class="social-qr">
+      <i class="fab fa-github"></i> <!-- Brand icon uses fab -->
+      <a href="https://github.com/xbotani" target="_blank">GitHub</a>
+      <img src="{{ url_for('static', filename='qrcode.png') }}" alt="QR to repo" />
+    </div>
+  </footer>
+
+  <!-- JS (deferred so DOM is ready) -->
+  <script defer src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>
